@@ -7,4 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Clases\" />
+    <Folder Include="Clases\BlackJack\" />
+    <Folder Include="Clases\Uno\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>
