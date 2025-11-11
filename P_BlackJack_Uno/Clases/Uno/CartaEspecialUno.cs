@@ -1,6 +1,5 @@
 using System;
 using P_BlackJack_Uno.Interfaces;
-
 namespace P_BlackJack_Uno.Clases.Uno;
 
 public class CartaEspecialUno : CartaBase, IComportamiento
