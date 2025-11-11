@@ -4,5 +4,11 @@ namespace P_BlackJack_Uno.Interfaces;
 
 public interface iFigura
 {
-    public abstract string Figura { get; set; }
+    Figura figura {get;}
+    public enum Figura{
+        Espadas,
+        Corazones,
+        Diamantes,
+        Treboles
+    }
 }
