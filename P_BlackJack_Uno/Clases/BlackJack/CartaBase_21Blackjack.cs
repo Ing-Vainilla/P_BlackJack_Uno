@@ -3,7 +3,7 @@ using P_BlackJack_Uno.Interfaces;
 
 namespace P_BlackJack_Uno.Clases.BlackJack;
 
-public abstract class CartaBase_21Blackjack : CartaBase, iFigura
+public class CartaBase_21Blackjack : CartaBase, iFigura
 {
      public override int Valor
     {
