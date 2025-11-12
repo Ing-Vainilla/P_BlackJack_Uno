@@ -5,18 +5,8 @@ namespace P_BlackJack_Uno.Clases.BlackJack;
 
 public class CartaEspecial_21Blackjack : CartaBase, iCaras
 {
-     public override int Valor
-    {
-        get { return _valor; }
-        set
-        {
-            if (value != 10)
-            {
-                throw new Exception($"El valor de la carta no es valido");
-            }
-            _valor = value;
-        }
-    }
+    private const int ValorEspecial = 10;
+    public override int Valor { get; set; }
 
     private static readonly Colores[] _coloresBlackjack = new Colores[]
    {
@@ -58,9 +48,10 @@ public class CartaEspecial_21Blackjack : CartaBase, iCaras
         get => $" {caras} {figura} {Color} {Valor} ";
     }
 
-    public CartaEspecial_21Blackjack(int valorCarta, Colores colorCarta, iFigura.Figura figura, iCaras.Caras caras) : base(valorCarta, colorCarta)
+    public CartaEspecial_21Blackjack(Colores colorCarta, iFigura.Figura figura, iCaras.Caras caras) : base(ValorEspecial, colorCarta)
     {
         _figura = figura;
         _caras = caras;
+        _valor = ValorEspecial;
     }
 }
