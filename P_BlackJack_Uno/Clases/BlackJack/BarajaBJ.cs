@@ -1,43 +1,49 @@
-using System;
-using System.Drawing;
+using System.Collections.Generic;
 using P_BlackJack_Uno.Interfaces;
+using P_BlackJack_Uno.Clases;
+using P_BlackJack_Uno.Clases.BlackJack;
 
 namespace P_BlackJack_Uno.Clases.BlackJack;
 
-public class BarajaBJ : BarajaBase, IPilaActiva
+public class BarajaBJ : BarajaBase
 {
-    private readonly List<CartaBase> _pilaDescarte = new List<CartaBase>();
+    private static readonly Dictionary<iFigura.Figura, CartaBase.Colores> _figurayColor=
+      new Dictionary<iFigura.Figura, CartaBase.Colores>()
+  {
+        { iFigura.Figura.Corazones, CartaBase.Colores.Rojo },
+        { iFigura.Figura.Diamantes, CartaBase.Colores.Rojo },
+        { iFigura.Figura.Espadas, CartaBase.Colores.Negro },
+        { iFigura.Figura.Treboles, CartaBase.Colores.Negro }
+  };
 
-    public List<CartaBase> PilaDescarte => _pilaDescarte;
-    public CartaBase CartaSuperior
-    {
-        get => _pilaDescarte.Last();
-    }
+    private static readonly iCaras.Caras[] _rangosNumericos =
+     { iCaras.Caras.Dos, iCaras.Caras.Tres, iCaras.Caras.Cuatro, iCaras.Caras.Cinco,
+          iCaras.Caras.Seis, iCaras.Caras.Siete, iCaras.Caras.Ocho, iCaras.Caras.Nueve,
+          iCaras.Caras.Diez
+        };
 
-    public void DescartarCarta(CartaBase carta)
-    {
-        _pilaDescarte.Add(carta);
-    }
+    private static readonly iCaras.Caras[] _carasEspeciales = 
+        { iCaras.Caras.AS, iCaras.Caras.K, iCaras.Caras.Q, iCaras.Caras.J };
 
-    public void ReciclarDescarte()
-    {
-        if (PilaDescarte.Count <= 1)
-        {
-            throw new InvalidOperationException("No hay suficientes cartas para reciclar.");
-        }
 
-        CartaBase cartaSuperior = PilaDescarte.Last();
-        PilaDescarte.RemoveAt(PilaDescarte.Count - 1);
-        this.Cartas.AddRange(PilaDescarte);
-        _pilaDescarte.Clear();
-        _pilaDescarte.Add(cartaSuperior);
-        this.Barajar();
-    }
-
-    private readonly CartaBase.Colores[] _coloresBlackjack = { CartaBase.Colores.Rojo, CartaBase.Colores.Negro };
     protected override void LlenarMazo()
     {
-        this.Cartas.Clear();
-        
+        foreach (var par in _figurayColor)
+        {
+            iFigura.Figura figuraActual = par.Key;
+            CartaBase.Colores colorActual = par.Value;
+
+            foreach (iCaras.Caras rango in _rangosNumericos)
+            {
+                int valorNumerico = (int)rango;
+                Cartas.Add(new CartaBase_21Blackjack(valorNumerico, colorActual, figuraActual));
+            }
+            
+            foreach (iCaras.Caras cara in _carasEspeciales)
+            {
+                Cartas.Add(new CartaEspecial_21Blackjack(colorActual, figuraActual, cara));
+            }
+        }
     }
 }
+
