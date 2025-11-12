@@ -3,7 +3,7 @@ using P_BlackJack_Uno.Interfaces;
 
 namespace P_BlackJack_Uno.Clases.BlackJack;
 
-public class CartaEspecial_21Blackjack : CartaBase, iCaras
+public class CartaEspecial_21Blackjack : CartaBase
 {
     private const int ValorEspecial = 10;
     public override int Valor { get; set; }
