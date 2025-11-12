@@ -4,7 +4,7 @@ namespace P_BlackJack_Uno.Interfaces;
 
 public interface iCaras
 {
-    Caras Tipo {get;}
+    Caras caras {get;}
     public enum Caras
     {
         Uno,
