@@ -7,6 +7,16 @@ public interface iCaras
     Caras Tipo {get;}
     public enum Caras
     {
+        Uno,
+        Dos,
+        Tres,
+        Cuatro,
+        Cinco,
+        Seis,
+        Siete,
+        Ocho,
+        Nueve,
+        Diez,
         AS,
         J,
         Q,
